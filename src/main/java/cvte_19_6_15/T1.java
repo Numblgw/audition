@@ -15,16 +15,19 @@ import java.util.*;
  *			第二种是在写第一种的时候突然想到的，这两个也比较相似，一个是从两边向中间对比，一个是从中间像两边对比。
  *
  *			在网上找了找，大部分还是用的第二种方法，不知道还有没有更好的方法。
-
+ *
+ *			###### 时间复杂度太高了，在力扣上测试直接 超出时间限制
+ *
+ *
  * @Author Numblgw
  * @Date 2019/6/15 19:58
  */
 public class T1 {
 
 	public static void main(String[] args) {
-		String s = "aawwsdfssdssfdsxxaap";
+		String s = "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd";
 		System.out.println("输入； " + s);
-		System.out.println("输出： " + method2(s));
+		System.out.println("输出： " + method1(s));
 	}
 
 	/**
@@ -103,11 +106,17 @@ public class T1 {
 				}
 			}
 		}
+
+		if(returnVal == "" && s.length() != 0) {
+			returnVal = String.valueOf(s.charAt(0));
+		}
+
 		return returnVal;
 	}
 
 	/**
-	 * 					方法二
+	 * 					方法二		####### 有 bug 没考虑到 baaab 这种情况
+	 * 								####### 无 bug 版本 在 demo.T9
 	 *
 	 * 			从左到右依次取第 i 个字符和第 i+1 个字符，i = 0,1,2,3.。。。。。
 	 * 		先判断这两个字符是否相等，如果相等就假设对称字符串包含2n个字符（双数个），并将这两个字符作为对称字符串的中心，
@@ -124,7 +133,7 @@ public class T1 {
 		Objects.requireNonNull(s);
 		String returnVal = "";
 		// 暂时存放当前的 第 i 个 和 第 i + 1 个字符
-		String s1,s2 = null;
+		String s1,s2;
 		// 只需要遍历到倒数第二个字符就可以了
 		for(int i = 0 ; i < s.length() - 1 ; i++) {
 			s1 = String.valueOf(s.charAt(i));
